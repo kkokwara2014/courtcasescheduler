@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Auth;
+
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +16,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $admins=User::where('role_id',1)->get()->count();
+               
+        return view('admin.index',compact('user','admins'));
     }
 
     /**

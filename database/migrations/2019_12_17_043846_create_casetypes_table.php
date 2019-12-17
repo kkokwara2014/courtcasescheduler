@@ -15,6 +15,7 @@ class CreateCasetypesTable extends Migration
     {
         Schema::create('casetypes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
         });
     }

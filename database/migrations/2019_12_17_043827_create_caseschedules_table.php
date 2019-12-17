@@ -15,6 +15,8 @@ class CreateCaseschedulesTable extends Migration
     {
         Schema::create('caseschedules', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('casedetail_id');
             $table->timestamps();
         });
     }
