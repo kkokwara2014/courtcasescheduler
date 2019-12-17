@@ -20,9 +20,9 @@ class JudgeController extends Controller
     {
         $user = Auth::user();
 
-        $clerks=User::where('role_id','2')->orderBy('created_at','desc')->get();
+        $judges=User::where('role_id','2')->orderBy('created_at','desc')->get();
                
-        return view('admin.clerk.index',compact('user','clerks'));
+        return view('admin.judge.index',compact('user','judges'));
     }
 
     /**
