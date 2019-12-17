@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Equipment Maintenance Scheduling | Dashboard</title>
+    <title>Court Case Scheduler | Dashboard</title>
 
     <link rel="shortcut icon" type="image/png" href="{{url('admin_assets/dist/img/','projlogo.png')}}" />
 

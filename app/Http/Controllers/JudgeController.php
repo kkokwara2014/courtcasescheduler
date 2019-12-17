@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Caseschedule;
+use App\User;
 use Illuminate\Http\Request;
+
+use Auth;
+
 
 class JudgeController extends Controller
 {
@@ -13,7 +18,11 @@ class JudgeController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $clerks=User::where('role_id','2')->orderBy('created_at','desc')->get();
+               
+        return view('admin.clerk.index',compact('user','clerks'));
     }
 
     /**
@@ -34,7 +43,25 @@ class JudgeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'lastname' => 'required|string',
+            'firstname' => 'required|string',
+            'email' => 'required',
+            'phone' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = new User;
+        $user->lastname = $request->lastname;
+        $user->firstname = $request->firstname;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_id = $request->role_id;
+        
+        $user->save();
+
+        return redirect(route('judge.index'));
     }
 
     /**
@@ -45,7 +72,10 @@ class JudgeController extends Controller
      */
     public function show($id)
     {
-        //
+        $judge=User::find($id);
+        $judgecases=Caseschedule::where('user_id',$id)->get();
+        
+        return view('admin.judge.show',array('user'=>Auth::user()),compact('judge','judgecases'));
     }
 
     /**

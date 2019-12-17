@@ -54,10 +54,10 @@ if ($timeIt > date('Y-m-d')) {
 
     Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
         Route::get('/', 'AdminController@index')->name('dashboard.index');
-        Route::resource('equipment', 'EquipmentController');
-        Route::resource('servicereport', 'ServicereportController');
-        Route::resource('staff', 'StaffController');
-        Route::resource('location', 'LocationController');
+        Route::resource('casedetail', 'CasedetailController');
+        Route::resource('caseschedule', 'CasescheduleController');
+        Route::resource('clerk', 'ClerkController');
+        Route::resource('judge', 'JudgeController');
         
 
         Route::get('user/profile', 'UserController@profileimage')->name('user.profile');

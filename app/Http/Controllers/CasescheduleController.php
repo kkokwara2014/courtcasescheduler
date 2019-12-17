@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Caseschedule;
 use Illuminate\Http\Request;
 
 class CasescheduleController extends Controller
@@ -34,7 +35,26 @@ class CasescheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'casedetail_id' => 'required',
+        ]);
+
+        $inputs = $request->all();
+        $casedetail_ids = $inputs['casedetail_id'];
+
+        //Multiple insert queries
+        foreach ($casedetail_ids as $casedetail_id) {
+            $casedetails[] = [
+                'user_id' => $request->user_id,
+                'casedetail_id' => $casedetail_id
+            ];
+        }
+
+        Caseschedule::insert($casedetails);
+
+
+        return redirect()->back();
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+
+use Auth;
 
 class ClerkController extends Controller
 {
@@ -13,7 +16,11 @@ class ClerkController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $clerks=User::where('role_id','3')->orderBy('created_at','desc')->get();
+               
+        return view('admin.clerk.index',compact('user','clerks'));
     }
 
     /**
@@ -34,7 +41,25 @@ class ClerkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'lastname' => 'required|string',
+            'firstname' => 'required|string',
+            'email' => 'required',
+            'phone' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = new User;
+        $user->lastname = $request->lastname;
+        $user->firstname = $request->firstname;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_id = $request->role_id;
+        
+        $user->save();
+
+        return redirect(route('clerk.index'));
     }
 
     /**
