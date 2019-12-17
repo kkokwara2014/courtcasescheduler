@@ -91,7 +91,7 @@
 
         {{-- Data input modal area --}}
         <div class="modal fade" id="modal-default">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
 
                 <form action="{{ route('casedetail.store') }}" method="post">
                     {{ csrf_field() }}
@@ -99,47 +99,56 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title"><span class="fa fa-tags"></span> Add Equipment</h4>
+                            <h4 class="modal-title"><span class="fa fa-info-circle"></span> Register Case</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="">Equipment # </label>
+                                <label for="">Case # </label>
                                 <input style="background-color: dodgerblue; color:floralwhite" type="text" class="form-control" name="equipnumber" readonly value="{{'EQ'. rand(55000, 99955)}}">
                             </div>
-                            <div class="form-group">
-                                <label for="">Equipment Name <b style="color: red;">*</b> </label>
-                                <input type="text" class="form-control" name="equipname" placeholder="Equipment Name"
-                                    autofocus>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Equipment Name <b style="color: red;">*</b> </label>
+                                        <input type="text" class="form-control" name="equipname" placeholder="Equipment Name"
+                                            autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Make <b style="color: red;">*</b> </label>
+                                        <input type="text" class="form-control" name="make" placeholder="Make"
+                                            autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Purchase Date <b style="color: red;">*</b> </label>
+                                        <input type="text" class="form-control" name="purchasedate" placeholder="Purchase Date"
+                                            id="datepicker">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Status</label>
+                                        <select name="status" class="form-control">
+                                            <option selected="disabled">Select Status</option>
+                                           
+                                            <option>Faulty</option>
+                                            <option>Ok</option>
+                                         
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Location</label>
+                                        <select name="location_id" class="form-control">
+                                            <option selected="disabled">Select Location</option>
+                                            @foreach ($locations as $location)
+                                            <option value="{{$location->id}}">{{$location->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="">Make <b style="color: red;">*</b> </label>
-                                <input type="text" class="form-control" name="make" placeholder="Make"
-                                    autofocus>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Purchase Date <b style="color: red;">*</b> </label>
-                                <input type="text" class="form-control" name="purchasedate" placeholder="Purchase Date"
-                                    id="datepicker">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Status</label>
-                                <select name="status" class="form-control">
-                                    <option selected="disabled">Select Status</option>
-                                   
-                                    <option>Faulty</option>
-                                    <option>Ok</option>
-                                 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Location</label>
-                                <select name="location_id" class="form-control">
-                                    <option selected="disabled">Select Location</option>
-                                    @foreach ($locations as $location)
-                                    <option value="{{$location->id}}">{{$location->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            
+                            
 
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                             

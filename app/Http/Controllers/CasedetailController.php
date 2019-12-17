@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+
 class CasedetailController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class CasedetailController extends Controller
      */
     public function index()
     {
-        //
+        $user=Auth::user();
+
+        
     }
 
     /**
