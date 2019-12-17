@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Casedetail;
+use App\Casetype;
+use App\User;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -17,7 +20,10 @@ class CasedetailController extends Controller
     {
         $user=Auth::user();
 
-        
+        $casedetails=Casedetail::orderBy('created_at','desc')->get();
+        $registrars=User::order('lastname','asc')->get();
+        $casetypes=Casetype::orderBy('name','asc')->get();
+        return view('admin.casedetail.index',compact('casedetails','registrars','user','casetypes'));
     }
 
     /**

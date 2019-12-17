@@ -28,7 +28,7 @@
                                    <th>Gender</th>
                                    <th>Phone</th>
                                    <th>Residence</th>
-                                   <th>Additional Info.</th>
+                                   <th>Case Type</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
 
@@ -37,12 +37,12 @@
                             <tbody>
                                 @foreach ($casedetails as $casedetail)
                                 <tr>
-                                    <td>{{$casedetail->equipnumber}}</td>
-                                    <td>{{$casedetail->equipname}}</td>
-                                    <td>{{$casedetail->make}}</td>
-                                    <td>{{$casedetail->purchasedate}}</td>
-                                    <td>{{$casedetail->status}}</td>
-                                    <td>{{$casedetail->location->name}}</td>
+                                    <td>{{$casedetail->casenumber}}</td>
+                                    <td>{{$casedetail->offender}}</td>
+                                    <td>{{$casedetail->gender}}</td>
+                                    <td>{{$casedetail->phone}}</td>
+                                    <td>{{$casedetail->residence}}</td>
+                                    <td>{{$casedetail->casetype->name}}</td>
                                     
 
                                     <td><a href="{{ route('casedetail.edit',$casedetail->id) }}"><span
@@ -75,7 +75,7 @@
                                     <th>Gender</th>
                                     <th>Phone</th>
                                     <th>Residence</th>
-                                    <th>Additional Info.</th>
+                                    <th>Case Type</th>
                                      <th>Edit</th>
                                      <th>Delete</th>
                                 </tr>
@@ -104,37 +104,44 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Case # </label>
-                                <input style="background-color: dodgerblue; color:floralwhite" type="text" class="form-control" name="equipnumber" readonly value="{{'EQ'. rand(55000, 99955)}}">
+                                <input style="background-color: dodgerblue; color:floralwhite" type="text" class="form-control" name="casenumber" readonly value="{{'CASE'. rand(55000, 99955)}}">
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Equipment Name <b style="color: red;">*</b> </label>
-                                        <input type="text" class="form-control" name="equipname" placeholder="Equipment Name"
+                                        <label for="">Offender's Name <b style="color: red;">*</b> </label>
+                                        <input type="text" class="form-control" name="offender" placeholder="Offender's Name"
                                             autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Make <b style="color: red;">*</b> </label>
-                                        <input type="text" class="form-control" name="make" placeholder="Make"
+                                        <label for="">Offense <b style="color: red;">*</b> </label>
+                                        <input type="text" class="form-control" name="offense" placeholder="Offense"
                                             autofocus>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Purchase Date <b style="color: red;">*</b> </label>
-                                        <input type="text" class="form-control" name="purchasedate" placeholder="Purchase Date"
-                                            id="datepicker">
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Status</label>
-                                        <select name="status" class="form-control">
-                                            <option selected="disabled">Select Status</option>
+                                        <label for="">Gender</label>
+                                        <select name="gender" class="form-control">
+                                            <option selected="disabled">Select Gender</option>
                                            
-                                            <option>Faulty</option>
-                                            <option>Ok</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
                                          
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Phone <b style="color: red;">*</b> </label>
+                                        <input type="text" class="form-control" name="phone" placeholder="Phone"
+                                            autofocus maxlength="11">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Residential Address <b style="color: red;">*</b> </label>
+                                        <textarea name="residence" id="" cols="30" rows="2" placeholder="Residential Address"></textarea>
+                                        <input type="text" class="form-control" name="phone" placeholder="Phone"
+                                            autofocus maxlength="11">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Location</label>
